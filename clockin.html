@@ -1,0 +1,79 @@
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<meta http-equiv="Access-Control-Allow-Origin" content="*" />
+<link rel="stylesheet" href="style.css">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="welcomeText">
+            <text style="font-weight: bold; font-size: 30px;">Automatic Clock In Script for SHSID PE Course</text> 
+            <div class="desc">This project is just a CS exercise which aims to dicover Scrapping, Flask, and Web Security technologies. It should not be used for any forms of illegal activities!</div>
+            <div class="desc">Feel free to star on GitHub~</div>
+        </div>
+        <div class="item">
+            <text class="title">Grade:</text>
+            <input type="text" id="grade" class="input"/>
+        </div>
+        <div class="item">
+            <text class="title">Class:</text>
+            <input type="text" id="classNum" class="input"/>
+        </div>
+        <div class="item">
+            <text class="title">Student ID:</text>
+            <input type="text" id="id" class="input"/>
+        </div>
+        <div class="item">
+            <text class="title">Exercise Time:</text>
+            <input type="text" id="exerciseTime" class="input"/>
+        </div>
+        <div class="button" id="btn" onclick="submit()">SUBMIT</div>
+        <textarea class="textArea" id="log" cols="30" rows="10" placeholder="Output Log:" value = ""></textarea>
+    </div>
+</body>
+
+<script>
+    jQuery.support.cors = true;
+    var isTapped = false;
+    function submit() {
+        if(!isTapped){
+            isTapped = true;
+            console.log("Posting...");
+        var grade = document.getElementById("grade").value;
+        var classNum = document.getElementById("classNum").value;
+        var id = document.getElementById("id").value;;
+        var exerciseTime = document.getElementById("exerciseTime").value;
+        document.getElementById("log").value = "Running...";
+        document.getElementById("log").value = document.getElementById("log").value + "\n You have entered the following parameters:";
+        document.getElementById("log").value = document.getElementById("log").value + "\n Grade:" + grade + " Class: " + classNum + " Student ID: "+ id + " Exercise Time: " + exerciseTime;
+        if(grade == "" || classNum == "" || id == "" || exerciseTime == ""){
+            document.getElementById("log").value = document.getElementById("log").value + "\n Error: Please make sure that you have entered all the parameters";
+            isTapped = false;
+            return;
+        }
+        document.getElementById("log").value = document.getElementById("log").value + "\n Posting Data to the server backend...";
+        $.post("http://127.0.0.1:5000/clockin", {
+            'grade': grade,
+            'class': classNum,
+            'id': id,
+            'exerciseTime': exerciseTime
+        }, function (result) {
+            document.getElementById("log").value = document.getElementById("log").value + result;
+            document.getElementById("log").value = document.getElementById("log").value + "\n Auto Clock In Succucess!";
+            alert("Auto Clock In Succucess!");
+        });
+        }
+        else{
+            alert("Please be patient");
+        }
+        
+    }
+</script>
+
+</html>
