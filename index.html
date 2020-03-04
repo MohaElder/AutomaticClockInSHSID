@@ -14,8 +14,9 @@
     <div class="container">
         <div class="welcomeText">
             <text style="font-weight: bold; font-size: 30px;">Automatic Clock In Script for SHSID PE Course</text> 
-            <div class="desc">This project is just a CS exercise which aims to dicover Scrapping, Flask, and Web Security technologies. It should not be used for any forms of illegal activities!</div>
-            <div class="desc">Feel free to star on GitHub~</div>
+            <div class="desc">This project aims to dicover Web Scrapping, Flask, and Web Security technologies. It should not be used for any forms of illegal activities.</div>
+            <div class="desc" style="color: black;">Feel free to star on GitHub:</div>
+            <iframe src="https://ghbtns.com/github-btn.html?user=mohaelder&repo=AutomaticClockInSHSID&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
         </div>
         <div style="width: 100%">
         <div class="item">
@@ -50,7 +51,7 @@
             <input type="text" id="id" class="input"/>
         </div>
     </div>
-        <div class="button" id="btn" onclick="submit()">SUBMIT</div>
+        <div class="button" id="btn" onclick="submit()">Start Auto ClockIn</div>
         <textarea class="textArea" id="log" cols="30" rows="10" placeholder="Output Log:" value = ""></textarea>
     </div>
 </body>
@@ -78,7 +79,7 @@
         }, function (result) {
             document.getElementById("log").value = document.getElementById("log").value + result;
             document.getElementById("log").value = document.getElementById("log").value + "\n Auto Clock In Succucess!";
-            alert("Auto Clock In Succucess!");
+            alert("Auto Clock In Succucess! The server will automatically clock in your PE list per 12 hours~");
         });
     }
 </script>
