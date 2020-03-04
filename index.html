@@ -31,6 +31,8 @@
             <text class="title">Class:</text>
             <select class="selector" id="classNum">
                 <option value="1">1</option>
+                <option value="1">1A</option>
+                <option value="1">1B</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -54,11 +56,8 @@
 </body>
 
 <script>
-    jQuery.support.cors = true;
-    var isTapped = false;
+    jQuery.support.cors = true;;
     function submit() {
-        if(!isTapped){
-            isTapped = true;
             console.log("Posting...");
         var grade = document.getElementById("grade").value;
         var classNum = document.getElementById("classNum").value;
@@ -68,11 +67,10 @@
         document.getElementById("log").value = document.getElementById("log").value + "\n Grade:" + grade + " Class: " + classNum + " Student ID: "+ id;
         if(grade == "" || classNum == "" || id == ""){
             document.getElementById("log").value = document.getElementById("log").value + "\n Error: Please make sure that you have entered all the parameters";
-            isTapped = false;
             return;
         }
         document.getElementById("log").value = document.getElementById("log").value + "\n Posting Data to the server backend...";
-        $.post("http://39.98.164.171:80/clockin", {
+        $.post("http://39.98.164.171:80/clockin", { 
             'grade': grade,
             'class': classNum,
             'id': id,
@@ -82,11 +80,6 @@
             document.getElementById("log").value = document.getElementById("log").value + "\n Auto Clock In Succucess!";
             alert("Auto Clock In Succucess!");
         });
-        }
-        else{
-            alert("Please be patient");
-        }
-        
     }
 </script>
 
