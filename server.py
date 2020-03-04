@@ -4,6 +4,7 @@ from flask_cors import CORS
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.select import Select
+import yagmail
 import time
 import datetime
 
@@ -19,7 +20,8 @@ class person:
         self.grade = ''
         self.classNum = ''
         self.studentID = ''
-        self.exerciseTime = ''  
+        self.exerciseTime = '' 
+        self.email = '' 
         
 app = Flask(__name__)
 CORS(app)
@@ -39,6 +41,7 @@ def regClockIn():
     student.classNum = request.form.get('class'),
     student.studentID = request.form.get('id'),
     student.exerciseTime = request.form.get('exerciseTime')
+    student.email = request.form.get('email')
     execArr.append(student)
     print(len(execArr), " Student(s) in execArr")
     return "Registration Successful!"
@@ -51,6 +54,16 @@ def getExecArr():
         studentIDs.join(temp)
     return studentIDs
 
+def sendEmail(email, imgUrl):
+    #链接邮箱服务器
+    yag = yagmail.SMTP( user="3416637635@qq.com", password="jusjjfwirioocibf", host='smtp.qq.com')
+    # 邮箱正文
+    contents = ['你好，Hello!',
+                'The attatched picture is your clock in status today. ']
+    # 发送邮件
+    yag.send(email, 'Auto Clock In Status', contents, [imgUrl])
+        
+    
 def ClockIn(student):
     print(student)
     chrome_options = Options()
@@ -82,6 +95,7 @@ def ClockIn(student):
     button.click()
     path = 'C:\\Users\\calen\\Desktop\\'+ str(student.studentID) + '.png'
     driver.save_screenshot(path)
+    sendEmail(str(student.email),path)
     driver.quit()
     return 
 

@@ -50,6 +50,10 @@
             <text class="title">Student ID:</text>
             <input type="text" id="id" class="input"/>
         </div>
+        <div class="item">
+            <text class="title">Email:</text>
+            <input type="text" id="email" class="input" placeholder="This email is to send you your auto clock in status everyday"/>
+        </div>
     </div>
         <div class="button" id="btn" onclick="submit()">Start Auto ClockIn</div>
         <textarea class="textArea" id="log" cols="30" rows="10" placeholder="Output Log:" value = ""></textarea>
@@ -62,7 +66,8 @@
             console.log("Posting...");
         var grade = document.getElementById("grade").value;
         var classNum = document.getElementById("classNum").value;
-        var id = document.getElementById("id").value;;
+        var id = document.getElementById("id").value;
+        var email = document.getElementById("email").value;;
         document.getElementById("log").value = "Running...";
         document.getElementById("log").value = document.getElementById("log").value + "\n You have entered the following parameters:";
         document.getElementById("log").value = document.getElementById("log").value + "\n Grade:" + grade + " Class: " + classNum + " Student ID: "+ id;
@@ -75,7 +80,8 @@
             'grade': grade,
             'class': classNum,
             'id': id,
-            'exerciseTime': '30mins'
+            'exerciseTime': '30mins',
+            'email': email
         }, function (result) {
             document.getElementById("log").value = document.getElementById("log").value + result;
             document.getElementById("log").value = document.getElementById("log").value + "\n Auto Clock In Succucess!";
