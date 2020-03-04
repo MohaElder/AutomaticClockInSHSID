@@ -56,7 +56,7 @@ def getExecArr():
 
 def sendEmail(email, imgUrl):
     #链接邮箱服务器
-    yag = yagmail.SMTP( user="3416637635@qq.com", password="jusjjfwirioocibf", host='smtp.qq.com')
+    yag = yagmail.SMTP( user="3416637635@qq.com", password="BLANK", host='smtp.qq.com')
     # 邮箱正文
     contents = ['你好，Hello!',
                 'The attatched picture is your clock in status today. ']
@@ -99,7 +99,6 @@ def ClockIn(student):
     driver.quit()
     return 
 
-# 每隔两秒执行一次任务
 def timedClockIn():
     print('TimeNow:%s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
     if(len(execArr) == 0):
