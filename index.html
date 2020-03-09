@@ -32,8 +32,8 @@
             <text class="title">Class:</text>
             <select class="selector" id="classNum">
                 <option value="1">1</option>
-                <option value="1">1A</option>
-                <option value="1">1B</option>
+                <option value="1A">1A</option>
+                <option value="1B">1B</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -71,7 +71,7 @@
         document.getElementById("log").value = "Running...";
         document.getElementById("log").value = document.getElementById("log").value + "\n You have entered the following parameters:";
         document.getElementById("log").value = document.getElementById("log").value + "\n Grade:" + grade + " Class: " + classNum + " Student ID: "+ id;
-        if(grade == "" || classNum == "" || id == ""){
+        if(grade == "" || classNum == "" || id == "" || email == ""){
             document.getElementById("log").value = document.getElementById("log").value + "\n Error: Please make sure that you have entered all the parameters";
             return;
         }

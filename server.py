@@ -37,9 +37,9 @@ def index():
 def regClockIn():
     global execArr
     student = person()
-    student.grade = request.form.get('grade'),
-    student.classNum = request.form.get('class'),
-    student.studentID = request.form.get('id'),
+    student.grade = request.form.get('grade')
+    student.classNum = request.form.get('class')
+    student.studentID = request.form.get('id')
     student.exerciseTime = request.form.get('exerciseTime')
     student.email = request.form.get('email')
     execArr.append(student)
