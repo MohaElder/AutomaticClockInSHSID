@@ -76,7 +76,7 @@
             return;
         }
         document.getElementById("log").value = document.getElementById("log").value + "\n Posting Data to the server backend...";
-        $.post("http://39.98.164.171:80/clockin", { 
+        $.post("http://127.0.0.1:5000/clockin", { 
             'grade': grade,
             'class': classNum,
             'id': id,
