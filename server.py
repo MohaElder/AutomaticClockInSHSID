@@ -24,6 +24,8 @@ class person:
         self.studentID = ''
         self.exerciseTime = '' 
         self.email = '' 
+    def getstudentID(self):
+        return self.studentID
         
 app = Flask(__name__)
 CORS(app)
@@ -31,6 +33,13 @@ execArr = []
 app.config.from_object(Config()) 
 scheduler = APScheduler()
 
+def cleanStr(word):
+    tempOne = word.replace("(","")
+    tempTwo = tempOne.replace("'","")
+    tempThree = tempTwo.replace(",","")
+    tempFour = tempThree.replace(")","")
+    print("New format:", tempFour)
+    return tempFour
 @app.route('/')
 def index():
     return 'It Works!'
@@ -40,8 +49,7 @@ def deleteStudent():
     print(request.form.get('id'))
     global execArr
     for i in range(0,len(execArr)):
-        print(str(execArr[i].studentID))
-        if request.form.get('id') in str(execArr[i].studentID):
+        if str(request.form.get('id')) == cleanStr(str(execArr[i].getstudentID())):
             print("found")
             del execArr[i]
             print("deleted")
