@@ -1,97 +1,109 @@
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <meta http-equiv="Access-Control-Allow-Origin" content="*" />
-<link rel="stylesheet" href="style.css">
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatic Clock In</title>
+    <title>Auto Clock In</title>
 </head>
 
 <body>
     <div class="container">
         <div class="welcomeText">
-            <text style="font-weight: bold; font-size: 30px;">Automatic Clock In Script for SHSID PE Course</text> 
-            <div class="desc">This project aims to dicover Web Scrapping, Flask, and Web Security technologies. It should not be used for any forms of illegal activities.</div>
+            <text style="font-weight: bold; font-size: 30px;">Automatic Clock In V2.0</text>
             <div class="desc" style="color: black;">Feel free to star on GitHub:</div>
-            <iframe src="https://ghbtns.com/github-btn.html?user=mohaelder&repo=AutomaticClockInSHSID&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+            <iframe
+                src="https://ghbtns.com/github-btn.html?user=MohaElder&repo=AutomaticClockInSHSID&type=star&count=true&size=large"
+                frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
         </div>
         <div style="width: 100%">
-        <div class="item">
-            <text class="title">Grade:</text>
-            <select class="selector" id="grade">
-                <option value="G9">9</option>
-                <option value="G10">10</option>
-                <option value="G11">11</option>
-                <option value="G12">12</option>
-            </select>
+            <div class="item">
+                <text class="title">Grade:</text>
+                <select class="ui selection dropdown" id="grade">
+                    <option value="G9">9</option>
+                    <option value="G10">10</option>
+                    <option value="G11">11</option>
+                    <option value="G12">12</option>
+                </select>
+            </div>
+            <div class="item">
+                <text class="title">Class:</text>
+                <select class="ui selection dropdown" id="classNum">
+                    <option value="1">1</option>
+                    <option value="1A">1A</option>
+                    <option value="1B">1B</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                </select>
+            </div>
+            <div class="item">
+                <text class="title">Student ID:</text>
+                <div class="ui input"><input type="text" id="id" placeholder="G2013114514" /></div>
+            </div>
+            <div class="item">
+                <text class="title">Email:</text>
+                <div class="ui input"><input type="text" id="email" class="ui input"
+                        placeholder="To get daily clockin status" /></div>
+            </div>
         </div>
-        <div class="item">
-            <text class="title">Class:</text>
-            <select class="selector" id="classNum">
-                <option value="1">1</option>
-                <option value="1A">1A</option>
-                <option value="1B">1B</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-            </select>
-        </div>
-        <div class="item">
-            <text class="title">Student ID:</text>
-            <input type="text" id="id" class="input"/>
-        </div>
-        <div class="item">
-            <text class="title">Email:</text>
-            <input type="text" id="email" class="input" placeholder="This email is to send you your auto clock in status everyday"/>
-        </div>
-    </div>
-        <div class="button" id="btn" onclick="submit()">Start Auto ClockIn</div>
-        <textarea class="textArea" id="log" cols="30" rows="10" placeholder="Output Log:" value = ""></textarea>
+        <buton class="ui primary big button" id="btn" onclick="submit()">Register</div>
     </div>
 </body>
-
 <script>
-    jQuery.support.cors = true;;
-    function submit() {
-        console.log("Posting...");
-        var grade = document.getElementById("grade").value;
-        var classNum = document.getElementById("classNum").value;
-        var id = document.getElementById("id").value;
-        var email = document.getElementById("email").value;;
-        document.getElementById("log").value = "Running...";
-        document.getElementById("log").value = document.getElementById("log").value + "\n You have entered the following parameters:";
-        document.getElementById("log").value = document.getElementById("log").value + "\n Grade:" + grade + " Class: " + classNum + " Student ID: "+ id;
-        if(grade == "" || classNum == "" || id == "" || email == ""){
-            alert("Error: Please make sure that you have entered all the parameters");
-            return;
+    jQuery.support.cors = true;
+    function validInfo(grade, classNum, id, email) {
+        if (grade == "" || classNum == "" || id == "" || email == "") {
+            alert("Error: Missing Parameters");
+            return false;
         }
         var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-        if(!reg.test(email)){
-            alert("Wrong Email Format!");
-            return;
+        if (!reg.test(email)) {
+            alert("Error: Wrong Email Format");
+            return false;
         }
-        document.getElementById("log").value = document.getElementById("log").value + "\n Posting Data to the server backend...";
-        $.post("http://39.98.164.171:80/clockin", { 
+        return true
+    }
+    function register(grade, classNum, id, email) {
+        $.post("http://127.0.0.1:5000/clockin", {
             'grade': grade,
             'class': classNum,
             'id': id,
             'exerciseTime': '30mins',
             'email': email
         }, function (result) {
-            document.getElementById("log").value = document.getElementById("log").value + result;
-            document.getElementById("log").value = document.getElementById("log").value + "\n Auto Clock In Succucess!";
-            alert("Auto Clock In Succucess! The server will automatically clock in your PE list per 12 hours~");
+            alert("Auto Clock In Succucess! The server will automatically clock in your PE list everyday");
         });
+    }
+    function submit() {
+        var grade = document.getElementById("grade").value;
+        var classNum = document.getElementById("classNum").value;
+        var id = document.getElementById("id").value;
+        var email = document.getElementById("email").value;;
+        if (validInfo(grade, classNum, id, email)) {
+            $.get("http://127.0.0.1:5000/clockin", function (res) {
+                var students = JSON.parse(res)
+                for (let student of students) {
+                    if (student.studentID == id || student.email == email) {
+                        alert("User already exists!")
+                        return
+                    }
+                }
+                postData(grade, classNum, id, email);
+            })
+        }
     }
 </script>
 
